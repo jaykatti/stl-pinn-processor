@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: stl-pinn-config
+  namespace: stl-pinn-processor
+data:
+  API_HOST: "0.0.0.0"
+  API_PORT: "8000"
+  API_WORKERS: "4"
+  ENVIRONMENT: "production"
+  MAX_FILE_SIZE_MB: "500"
+  PINN_BATCH_SIZE: "1024"
+  PINN_EPOCHS: "1000"
+  ENABLE_METRICS: "true"

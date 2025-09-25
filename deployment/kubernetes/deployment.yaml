@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stl-pinn-api
+  namespace: stl-pinn-processor
+  labels:
+    app: stl-pinn-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: stl-pinn-api
+  template:
+    metadata:
+      labels:
+        app: stl-pinn-api
+    spec:
+      containers:
+      - name: api
+        image: your-org/stl-pinn-processor:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: stl-pinn-secrets
+              key: database-url
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: stl-pinn-secrets
+              key: redis-url
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: stl-pinn-secrets
+              key: openai-api-key
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1000m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+        livenessProbe:
+          httpGet:
+            path: /api/v1/health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /api/v1/health
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        volumeMounts:
+        - name: data-volume
+          mountPath: /app/data
+        - name: output-volume
+          mountPath: /app/outputs
+      volumes:
+      - name: data-volume
+        persistentVolumeClaim:
+          claimName: stl-pinn-data-pvc
+      - name: output-volume
+        persistentVolumeClaim:
+          claimName: stl-pinn-output-pvc

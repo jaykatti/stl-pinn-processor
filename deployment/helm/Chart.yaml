@@ -1,0 +1,16 @@
+apiVersion: v2
+name: stl-pinn-processor
+description: A Helm chart for STL-PINN Processor
+version: 1.0.0
+appVersion: "1.0.0"
+keywords:
+  - stl
+  - pinn
+  - mesh
+  - processing
+home: https://github.com/your-org/stl-pinn-processor
+sources:
+  - https://github.com/your-org/stl-pinn-processor
+maintainers:
+  - name: Your Organization
+    email: contact@yourorg.com
