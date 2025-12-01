@@ -16,33 +16,33 @@ else
 fi
 
 # Check if virtual environment exists
-if [ ! -d "venv" ]; then
-    echo "📦 Creating virtual environment..."
-    python3 -m venv venv
-fi
+# if [ ! -d "venv" ]; then
+#     echo "📦 Creating virtual environment..."
+#     python3 -m venv venv
+# fi
 
-# Activate virtual environment
-echo "🔧 Activating virtual environment..."
-source venv/bin/activate
+# # Activate virtual environment
+# echo "🔧 Activating virtual environment..."
+# source venv/bin/activate
 
-# Upgrade pip
-echo "⬆️ Upgrading pip..."
-pip install --upgrade pip
+# # Upgrade pip
+# echo "⬆️ Upgrading pip..."
+# pip install --upgrade pip
 
-# Install dependencies
-echo "📋 Installing dependencies..."
-pip install -r requirements-dev.txt
+# # Install dependencies
+# echo "📋 Installing dependencies..."
+# pip install -r requirements-dev.txt
 
 # Setup pre-commit hooks
 echo "🪝 Setting up pre-commit hooks..."
 pre-commit install
 
 # Create necessary directories
-echo "📁 Creating directories..."
-mkdir -p data/{samples,materials,templates}
-mkdir -p outputs
-mkdir -p logs
-mkdir -p models/{checkpoints,pretrained}
+# echo "📁 Creating directories..."
+# mkdir -p data/{samples,materials,templates}
+# mkdir -p outputs
+# mkdir -p logs
+# mkdir -p models/{checkpoints,pretrained}
 
 # Copy environment file
 if [ ! -f ".env" ]; then

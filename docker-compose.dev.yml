@@ -32,6 +32,7 @@ services:
       - postgres_dev_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    command: redis-server --requirepass 12345
     restart: unless-stopped
 
   redis:
